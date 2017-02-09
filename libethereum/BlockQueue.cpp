@@ -49,7 +49,8 @@ BlockQueue::BlockQueue():
 	m_unknownCount(0)
 {
 	// Allow some room for other activity
-	unsigned verifierThreads = std::max(thread::hardware_concurrency(), 3U) - 2U;
+	//unsigned verifierThreads = std::max(thread::hardware_concurrency(), 3U) - 2U;
+	unsigned verifierThreads = 1;
 	for (unsigned i = 0; i < verifierThreads; ++i)
 		m_verifiers.emplace_back([=](){
 			setThreadName("verifier" + toString(i));
