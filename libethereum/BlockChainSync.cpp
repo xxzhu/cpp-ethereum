@@ -598,6 +598,7 @@ void BlockChainSync::collectBlocks()
 		case ImportResult::UnknownParent:
 			if (headers.first + i > m_lastImportedBlock)
 			{
+				clog(NetWarn) << "Unknown parent, resetting sync";
 				resetSync();
 				m_haveCommonHeader = false; // fork detected, search for common header again
 			}
