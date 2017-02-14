@@ -45,7 +45,6 @@ endforeach(file)
 file(GLOB HEADERS "*.h")
 add_executable(testeth ${SRC_LIST} ${HEADERS})
 
-find_package(Boost QUIET REQUIRED COMPONENTS unit_test_framework)
 find_package(Eth)
 find_package(Web3)
 
@@ -54,12 +53,6 @@ target_include_directories(testeth PRIVATE ../utils)
 
 target_link_libraries(testeth ${Boost_UNIT_TEST_FRAMEWORK_LIBRARIES})
 target_link_libraries(testeth ${Eth_TESTUTILS_LIBRARIES})
-
-if (MSVC)
-	find_package(Boost QUIET REQUIRED COMPONENTS chrono date_time)
-	target_link_libraries(testeth ${Boost_CHRONO_LIBRARIES})
-	target_link_libraries(testeth ${Boost_DATE_TIME_LIBRARIES})
-endif()
 
 if (UNIX AND NOT APPLE)
 	target_link_libraries(testeth pthread)
